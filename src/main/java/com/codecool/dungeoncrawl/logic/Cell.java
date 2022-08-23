@@ -47,4 +47,11 @@ public class Cell implements Drawable {
     public int getY() {
         return y;
     }
+
+    public boolean validatePlayerMove() {
+        if(type == CellType.WALL || actor != null ){   //  todo  actor != null  --> attack monster
+            return false;
+        }
+        return true;
+    }
 }
