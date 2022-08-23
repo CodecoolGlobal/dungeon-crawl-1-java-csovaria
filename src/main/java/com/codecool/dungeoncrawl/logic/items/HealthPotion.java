@@ -19,6 +19,11 @@ public class HealthPotion extends Item{
     }
 
     @Override
+    public boolean isNeedToActivate() {
+        return false;
+    }
+
+    @Override
     public String getTileName() {
         return "health";
     }

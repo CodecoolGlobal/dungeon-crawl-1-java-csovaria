@@ -18,6 +18,11 @@ public class Sword extends Item {
     }
 
     @Override
+    public boolean isNeedToActivate() {
+        return true;
+    }
+
+    @Override
     public String getTileName() {
         return "sword";
     }
