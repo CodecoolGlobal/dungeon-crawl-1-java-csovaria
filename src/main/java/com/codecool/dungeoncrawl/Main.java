@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -89,7 +90,11 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                    pickUpAnActiveItem();
+                    if (map.getPlayer().getCell().getItem() != null) {
+                        pickUpAnActiveItem();
+                    } else {
+                        pickUpItem.setText("");
+                    }
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
@@ -99,12 +104,12 @@ public class Main extends Application {
     }
 
     private void pickUpAnActiveItem() {
-        if (map.getPlayer().getCell().getItem() != null) {
             pickUpItem.setText("Pick up item: " + map.getPlayer().getCell().getItem().getTileName());
-            pickUpItem.setOnMouseClicked(mouseEvent -> pickUpItem.setText("You picked up a " + map.getPlayer().getCell().getItem().getTileName() + "."));
-            pickUpItem.setOnMouseClicked(mouseEvent -> map.getPlayer().getCell().getItem().interact(map.getPlayer()));
-        } else {
-            pickUpItem.setText("");
-        }
+            pickUpItem.setOnMouseClicked(this::pickUp);
+    }
+
+    private void pickUp(MouseEvent mouseEvent) {
+        map.getPlayer().getCell().getItem().interact(map.getPlayer());
+        refresh();
     }
 }
