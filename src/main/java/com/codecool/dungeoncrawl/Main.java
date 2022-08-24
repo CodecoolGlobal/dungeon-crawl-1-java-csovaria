@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -16,10 +17,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+//    This is the width and height of the visible area in terms of tiles
+    public static int VISIBLE_TILES_SIZE = 10;
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
-            map.getWidth() * Tiles.TILE_WIDTH,
-            map.getHeight() * Tiles.TILE_WIDTH);
+            VISIBLE_TILES_SIZE * Tiles.TILE_WIDTH,
+            VISIBLE_TILES_SIZE * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
 
@@ -72,11 +75,34 @@ public class Main extends Application {
     }
 
     private void refresh() {
+//        Get the location of the player
+        Player player = map.getPlayer();
+        int playerX = player.getX();
+        int playerY = player.getY();
+//        Color the whole canvas
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
-                Cell cell = map.getCell(x, y);
+
+//        Fill the visible part of the canvas
+        for (int x = 0; x < VISIBLE_TILES_SIZE; x++) {
+            for (int y = 0; y < VISIBLE_TILES_SIZE; y++) {
+//                Create new variable, we need this, because the player will not be centered when on the edge
+                int middleX = playerX;
+                int middleY = playerY;
+//                Check if the player is close to the edge, in this case the center will not be the player's coordinates
+                if (playerX - VISIBLE_TILES_SIZE / 2 < 0) {
+                    middleX = VISIBLE_TILES_SIZE / 2;
+                } else if (playerX + VISIBLE_TILES_SIZE / 2 > map.getWidth()) {
+                    middleX = map.getWidth() - VISIBLE_TILES_SIZE / 2;
+                }
+                if (playerY - VISIBLE_TILES_SIZE / 2 < 0) {
+                    middleY = VISIBLE_TILES_SIZE / 2;
+                } else if (playerY + VISIBLE_TILES_SIZE / 2 > map.getHeight()) {
+                    middleY = map.getHeight() - VISIBLE_TILES_SIZE / 2;
+                }
+
+//                Read cell value from map at the generated coordinates and draw Tiles on the canvas
+                Cell cell = map.getCell(middleX - 5 + x, middleY - 5 + y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else {
