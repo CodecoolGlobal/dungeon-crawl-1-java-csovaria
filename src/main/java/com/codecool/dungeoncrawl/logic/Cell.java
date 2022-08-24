@@ -1,11 +1,13 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Actor;
+import com.codecool.dungeoncrawl.logic.items.Item;
 
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     private GameMap gameMap;
+    private Item item;
     private int x, y;
 
     Cell(GameMap gameMap, int x, int y, CellType type) {
@@ -27,8 +29,13 @@ public class Cell implements Drawable {
         this.actor = actor;
     }
 
+
     public Actor getActor() {
         return actor;
+    }
+
+    public Item getItem() {
+        return item;
     }
 
     public Cell getNeighbor(int dx, int dy) {
@@ -53,5 +60,9 @@ public class Cell implements Drawable {
             return false;
         }
         return true;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }
