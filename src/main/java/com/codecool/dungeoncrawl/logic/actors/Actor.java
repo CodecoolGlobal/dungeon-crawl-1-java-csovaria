@@ -11,6 +11,7 @@ public abstract class Actor implements Drawable {
     }
 
     private int health = 10;
+    private int sword = 0;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -24,7 +25,9 @@ public abstract class Actor implements Drawable {
             nextCell.setActor(this);
             cell = nextCell;
             if (nextCell.getItem() != null){
-                nextCell.getItem().interact(this);
+                if (!nextCell.getItem().isNeedToActivate()) {
+                    nextCell.getItem().interact(this);
+                }
             }
         }
     }
@@ -44,5 +47,13 @@ public abstract class Actor implements Drawable {
 
     public int getY() {
         return cell.getY();
+    }
+
+    public void setSword(int sword) {
+        this.sword = sword;
+    }
+
+    public int getSword() {
+        return sword;
     }
 }

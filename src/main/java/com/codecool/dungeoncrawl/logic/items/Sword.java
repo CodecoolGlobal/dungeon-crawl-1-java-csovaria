@@ -3,28 +3,27 @@ package com.codecool.dungeoncrawl.logic.items;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 
-public class HealthPotion extends Item{
+public class Sword extends Item {
 
-    private final int value = 5;
 
-    public HealthPotion(Cell cell) {
+    public Sword(Cell cell) {
         super(cell);
     }
 
 
     @Override
     public void interact(Actor actor) {
-        actor.setHealth(actor.getHealth() + value);
+        actor.setSword(1);
         actor.getCell().setItem(null);
     }
 
     @Override
     public boolean isNeedToActivate() {
-        return false;
+        return true;
     }
 
     @Override
     public String getTileName() {
-        return "health";
+        return "sword";
     }
 }

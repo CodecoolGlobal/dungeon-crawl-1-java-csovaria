@@ -14,6 +14,8 @@ public abstract class Item implements Drawable {
 
     public abstract void interact(Actor actor);
 
+    public abstract boolean isNeedToActivate();
+
     public Cell getCell() {
         return cell;
     }

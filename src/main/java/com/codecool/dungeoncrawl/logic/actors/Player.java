@@ -8,6 +8,9 @@ public class Player extends Actor {
     }
 
     public String getTileName() {
+        if (getSword() == 1){
+            return "playerWithSword";
+        }
         return "player";
     }
 }
