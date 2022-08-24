@@ -34,6 +34,7 @@ public class Main extends Application {
     Label pickUpItem = new Label();
     Label inventory = new Label();
 
+
     public static List<Actor> monsters = new ArrayList<>();
 
     public static void main(String[] args) {
