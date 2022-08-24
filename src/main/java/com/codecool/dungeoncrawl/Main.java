@@ -3,8 +3,13 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -16,6 +21,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class Main extends Application {
@@ -29,6 +39,12 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label pickUpItem = new Label();
     Label inventory = new Label();
+
+    public static List<Actor> monsters = new ArrayList<>();
+    int delay = 200;
+
+    Timeline timeline = new Timeline();
+    Random random = new Random();
 
     public static void main(String[] args) {
         launch(args);
@@ -49,6 +65,8 @@ public class Main extends Application {
         ui.add(new Label("Inventory"), 0 , 9);
         ui.add(inventory, 0, 10);
 
+
+
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
@@ -61,6 +79,17 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(delay),
+                    event -> Platform.runLater(() ->
+                            pickUpItem.setText(String.format("%02d", random.nextInt(100))
+                            )
+                    )
+            );
+            timeline.getKeyFrames().add(keyFrame);
+            timeline.setCycleCount(100);
+            timeline.play();
+            moveTheMonsters();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -87,10 +116,16 @@ public class Main extends Application {
         }
     }
 
+    public void moveTheMonsters() {
+        for (Actor monster: monsters) {
+            monster.move();
+        }
+    }
 
 
     private void refresh() {
 //        Get the location of the player
+        moveTheMonsters();
         Player player = map.getPlayer();
         int playerX = player.getX();
         int playerY = player.getY();

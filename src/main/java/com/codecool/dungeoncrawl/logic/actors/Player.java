@@ -14,6 +14,11 @@ public class Player extends Actor {
         super(cell);
     }
 
+    @Override
+    public void move() {
+
+    }
+
     public String toString() {
         if (getSword() == 1) {
             return "playerWithSword";

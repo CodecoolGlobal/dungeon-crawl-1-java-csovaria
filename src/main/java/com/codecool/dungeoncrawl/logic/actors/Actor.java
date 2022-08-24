@@ -22,6 +22,7 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+    public abstract void move();
 
     public int getHealth() {
         return

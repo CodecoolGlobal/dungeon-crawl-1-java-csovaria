@@ -7,6 +7,8 @@ import com.codecool.dungeoncrawl.logic.items.*;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import static com.codecool.dungeoncrawl.Main.monsters;
+
 public class MapLoader {
     public static GameMap loadMap() {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
@@ -34,7 +36,7 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            monsters.add(new Skeleton(cell));
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

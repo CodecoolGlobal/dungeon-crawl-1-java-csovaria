@@ -5,11 +5,11 @@ import com.codecool.dungeoncrawl.logic.Cell;
 public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
         super(cell);
-        move();
     }
 
+    @Override
     public void move() {
-            Cell nextCell = cell.getNeighbor(0, 3);
+            Cell nextCell = cell.getNeighbor(0, 1);
             if (nextCell.validatePlayerMove()) {
                 cell.setActor(null);
                 nextCell.setActor(this);
