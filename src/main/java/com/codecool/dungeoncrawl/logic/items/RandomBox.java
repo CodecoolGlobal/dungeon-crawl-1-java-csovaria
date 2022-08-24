@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic.items;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
+import com.codecool.dungeoncrawl.logic.actors.Player;
 
 import java.util.Random;
 
@@ -15,14 +16,14 @@ public class RandomBox extends Item{
 
 
     @Override
-    public void interact(Actor actor) {
+    public void interact(Player player) {
         int randomEffect = new Random().nextInt(2);
         if(randomEffect == 0){
-            actor.setHealth(actor.getHealth() + value);
+            player.setHealth(player.getHealth() + value);
         } else {
-            actor.setHealth(actor.getHealth() - value);
+            player.setHealth(player.getHealth() - value);
         }
-        actor.getCell().setItem(null);
+        player.getCell().setItem(null);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class RandomBox extends Item{
     }
 
     @Override
-    public String getTileName() {
+    public String toString() {
         return "random";
     }
 }

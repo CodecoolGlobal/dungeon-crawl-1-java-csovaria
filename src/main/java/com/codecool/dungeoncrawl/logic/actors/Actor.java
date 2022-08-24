@@ -25,8 +25,8 @@ public abstract class Actor implements Drawable {
             nextCell.setActor(this);
             cell = nextCell;
             if (nextCell.getItem() != null){
-                if (!nextCell.getItem().isNeedToActivate()) {
-                    nextCell.getItem().interact(this);
+                if (!nextCell.getItem().isNeedToActivate() && this instanceof Player) {
+                    nextCell.getItem().interact((Player) this);
                 }
             }
         }

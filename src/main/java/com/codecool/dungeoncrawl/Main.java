@@ -28,6 +28,7 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label pickUpItem = new Label();
+    Label inventory = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -44,6 +45,9 @@ public class Main extends Application {
 
         ui.add(new Label(""), 0 , 0);
         ui.add(pickUpItem, 0, 1);
+
+        ui.add(new Label("Inventory"), 0 , 9);
+        ui.add(inventory, 0, 10);
 
         BorderPane borderPane = new BorderPane();
 
@@ -127,10 +131,11 @@ public class Main extends Application {
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        inventory.setText("" + map.getPlayer().getInventory());
     }
 
     private void pickUpAnActiveItem() {
-                pickUpItem.setText("Click or hit Enter\n to Pick up item: " + map.getPlayer().getCell().getItem().getTileName());
+                pickUpItem.setText("Click or hit Enter\n to Pick up item: " + map.getPlayer().getCell().getItem());
                 pickUpItem.setOnMouseClicked(this::pickUp);
     }
 
