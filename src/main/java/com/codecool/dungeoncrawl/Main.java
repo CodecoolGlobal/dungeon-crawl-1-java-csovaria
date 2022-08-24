@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
+import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -17,6 +18,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main extends Application {
 //    This is the width and height of the visible area in terms of tiles
@@ -29,6 +33,8 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label pickUpItem = new Label();
     Label inventory = new Label();
+
+    public static List<Actor> monsters = new ArrayList<>();
 
     public static void main(String[] args) {
         launch(args);
@@ -87,8 +93,15 @@ public class Main extends Application {
         }
     }
 
+    private void moveMonsters() {
+        for (Actor monster: monsters) {
+            monster.monsterMove();
+        }
+    }
+
     private void refresh() {
 //        Get the location of the player
+        moveMonsters();
         Player player = map.getPlayer();
         int playerX = player.getX();
         int playerY = player.getY();
