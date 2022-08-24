@@ -5,7 +5,10 @@ import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -17,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,9 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label pickUpItem = new Label();
     Label inventory = new Label();
+
+    int delay = 400;
+    Timeline timeLine = new Timeline();
 
     public static List<Actor> monsters = new ArrayList<>();
 
@@ -67,6 +74,14 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(delay),
+                event -> Platform.runLater(this::moveMonsters
+                )
+        );
+        timeLine.getKeyFrames().add(keyFrame);
+        timeLine.setCycleCount(100);
+        timeLine.play();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -96,12 +111,13 @@ public class Main extends Application {
     private void moveMonsters() {
         for (Actor monster: monsters) {
             monster.monsterMove();
+            refresh();
         }
+
     }
 
     private void refresh() {
 //        Get the location of the player
-        moveMonsters();
         Player player = map.getPlayer();
         int playerX = player.getX();
         int playerY = player.getY();
@@ -128,7 +144,7 @@ public class Main extends Application {
                 }
 
 //                Read cell value from map at the generated coordinates and draw Tiles on the canvas
-                Cell cell = map.getCell(middleX - 5 + x, middleY - 5 + y);
+                Cell cell = map.getCell(middleX - (VISIBLE_TILES_SIZE/2) + x, middleY - (VISIBLE_TILES_SIZE/2) + y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
