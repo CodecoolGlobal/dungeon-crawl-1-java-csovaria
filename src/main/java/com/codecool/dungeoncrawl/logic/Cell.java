@@ -6,7 +6,7 @@ import com.codecool.dungeoncrawl.logic.items.Item;
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
-    private GameMap gameMap;
+    private final GameMap gameMap;
     private Item item;
     private int x, y;
 
@@ -42,8 +42,7 @@ public class Cell implements Drawable {
         return gameMap.getCell(x + dx, y + dy);
     }
 
-    @Override
-    public String getTileName() {
+    public String toString() {
         return type.getTileName();
     }
 

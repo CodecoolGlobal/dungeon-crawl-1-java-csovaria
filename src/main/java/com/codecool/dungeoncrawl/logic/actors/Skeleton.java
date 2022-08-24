@@ -7,8 +7,7 @@ public class Skeleton extends Actor {
         super(cell);
     }
 
-    @Override
-    public String getTileName() {
+    public String toString() {
         return "skeleton";
     }
 }

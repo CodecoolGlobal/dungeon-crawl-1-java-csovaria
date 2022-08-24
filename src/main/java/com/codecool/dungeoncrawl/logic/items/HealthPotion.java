@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic.items;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
+import com.codecool.dungeoncrawl.logic.actors.Player;
 
 public class HealthPotion extends Item{
 
@@ -13,9 +14,9 @@ public class HealthPotion extends Item{
 
 
     @Override
-    public void interact(Actor actor) {
-        actor.setHealth(actor.getHealth() + value);
-        actor.getCell().setItem(null);
+    public void interact(Player player) {
+        player.setHealth(player.getHealth() + value);
+        player.getCell().setItem(null);
     }
 
     @Override
@@ -24,7 +25,7 @@ public class HealthPotion extends Item{
     }
 
     @Override
-    public String getTileName() {
+    public String toString() {
         return "health";
     }
 }

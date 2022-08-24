@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic.items;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
+import com.codecool.dungeoncrawl.logic.actors.Player;
 
 public class Sword extends Item {
 
@@ -12,9 +13,10 @@ public class Sword extends Item {
 
 
     @Override
-    public void interact(Actor actor) {
-        actor.setSword(1);
-        actor.getCell().setItem(null);
+    public void interact(Player player) {
+        player.setSword(1);
+        player.getCell().setItem(null);
+        player.setInventory(this);
     }
 
     @Override
@@ -23,7 +25,7 @@ public class Sword extends Item {
     }
 
     @Override
-    public String getTileName() {
+    public String toString() {
         return "sword";
     }
 }
