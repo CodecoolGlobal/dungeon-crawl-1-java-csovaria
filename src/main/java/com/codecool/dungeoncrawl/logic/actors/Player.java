@@ -28,21 +28,26 @@ public class Player extends Actor {
     }
 
     public void move(int dx, int dy) {
+
+        if (cell.getItem() != null) {
+            if (!cell.getItem().isNeedToActivate()) {
+                cell.getItem().interact(this);
+            }
+        }
+
+
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (nextCell.getItem() instanceof RedGate) {
             nextCell.getItem().interact(this);
         }
-        if (nextCell.validatePlayerMove()){
+        if (nextCell.validatePlayerMove()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-            if (nextCell.getItem() != null){
-                if (!nextCell.getItem().isNeedToActivate()) {
-                    nextCell.getItem().interact(this);
-                }
-            }
         }
     }
+
+
 
     public void setInventory(Item item) {
         this.inventory.add(item);

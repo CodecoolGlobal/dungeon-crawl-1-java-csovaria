@@ -149,7 +149,7 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                    if (map.getPlayer().getCell().getItem() != null) {
+                    if (map.getPlayer().getCell().getItem() != null && map.getPlayer().getCell().getItem().isNeedToActivate()) {
                         pickUpAnActiveItem();
                     } else {
                         pickUpItem.setText("");

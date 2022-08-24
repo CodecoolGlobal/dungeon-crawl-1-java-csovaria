@@ -34,6 +34,8 @@ public class Tiles {
         tileMap.put("random", new Tile(21,25));
         tileMap.put("red_key", new Tile(18,23));
         tileMap.put("red_gate", new Tile(22,11));
+        tileMap.put("fire", new Tile(15,10));
+        tileMap.put("fire_mage", new Tile(15,24));
 
     }
 

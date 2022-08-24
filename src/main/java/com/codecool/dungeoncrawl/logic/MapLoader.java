@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.logic.actors.FireMage;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
 import com.codecool.dungeoncrawl.logic.items.*;
@@ -61,6 +62,14 @@ public class MapLoader {
                         case '2':
                             cell.setType(CellType.WALL);
                             new RedGate(cell);
+                            break;
+                        case 'f':
+                            cell.setType(CellType.FLOOR);
+                            new Fire(cell);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            monsters.add(new FireMage(cell));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
