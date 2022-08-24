@@ -75,7 +75,7 @@ public class Main extends Application {
                 refresh();
                 break;
             case ENTER:
-                refresh();
+                pickUpWithEnter();
                 break;
         }
     }
@@ -104,12 +104,19 @@ public class Main extends Application {
     }
 
     private void pickUpAnActiveItem() {
-            pickUpItem.setText("Pick up item: " + map.getPlayer().getCell().getItem().getTileName());
-            pickUpItem.setOnMouseClicked(this::pickUp);
+                pickUpItem.setText("Click or hit Enter\n to Pick up item: " + map.getPlayer().getCell().getItem().getTileName());
+                pickUpItem.setOnMouseClicked(this::pickUp);
     }
 
     private void pickUp(MouseEvent mouseEvent) {
         map.getPlayer().getCell().getItem().interact(map.getPlayer());
         refresh();
+    }
+
+    private void pickUpWithEnter() {
+        if (map.getPlayer().getCell().getItem() != null){
+            map.getPlayer().getCell().getItem().interact(map.getPlayer());
+            refresh();
+        }
     }
 }
