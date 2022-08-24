@@ -9,19 +9,14 @@ public class RedGate extends Item{
         super(cell);
     }
 
+
+
     @Override
     public void interact(Player player) {
-
-
-        boolean playerHasKey = false;
-        for(Item playersItem: player.getInventory()){
-            if(playersItem instanceof RedKey){
-                playerHasKey = true;
+        for (Item playersItem : player.getInventory()) {
+            if (playersItem instanceof RedKey) {
+                this.getCell().setType(CellType.FLOOR);
             }
-        }
-        if(playerHasKey){
-            player.getCell().setItem(null);
-            player.getCell().setType(CellType.FLOOR);
         }
     }
 

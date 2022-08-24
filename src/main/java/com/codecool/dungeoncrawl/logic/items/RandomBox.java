@@ -26,6 +26,7 @@ public class RandomBox extends Item{
         player.getCell().setItem(null);
     }
 
+
     @Override
     public boolean isNeedToActivate() {
         return true;
