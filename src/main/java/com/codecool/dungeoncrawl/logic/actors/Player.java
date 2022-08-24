@@ -21,6 +21,20 @@ public class Player extends Actor {
         return "player";
     }
 
+    public void move(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if (nextCell.validatePlayerMove()){
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+            if (nextCell.getItem() != null){
+                if (!nextCell.getItem().isNeedToActivate()) {
+                    nextCell.getItem().interact(this);
+                }
+            }
+        }
+    }
+
     public void setInventory(Item item) {
         this.inventory.add(item);
     }

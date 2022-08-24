@@ -87,6 +87,8 @@ public class Main extends Application {
         }
     }
 
+
+
     private void refresh() {
 //        Get the location of the player
         Player player = map.getPlayer();
