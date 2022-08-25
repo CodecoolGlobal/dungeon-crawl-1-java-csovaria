@@ -36,6 +36,18 @@ public abstract class Actor implements Drawable {
         return damage;
     }
 
+    public List<Cell> getNearbyCells(Cell myCell){
+        List<Cell> nearbyCells = new ArrayList<>();
+        nearbyCells.add(myCell.getNeighbor(0,0));
+        nearbyCells.add(myCell.getNeighbor(0,-1));
+        nearbyCells.add(myCell.getNeighbor(-1,0));
+        nearbyCells.add(myCell.getNeighbor(-1,1));
+        nearbyCells.add(myCell.getNeighbor(-1,-1));
+        nearbyCells.add(myCell.getNeighbor(1,1));
+        nearbyCells.add(myCell.getNeighbor(1,0));
+        nearbyCells.add(myCell.getNeighbor(1,-1));
+        return nearbyCells;
+    }
     public int getHealth() {
         return
                 health;
