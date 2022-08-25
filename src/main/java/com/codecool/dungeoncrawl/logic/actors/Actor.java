@@ -2,10 +2,13 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.Drawable;
+import com.codecool.dungeoncrawl.logic.items.Fire;
+import com.codecool.dungeoncrawl.logic.items.HealthPotion;
 import com.codecool.dungeoncrawl.logic.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class Actor implements Drawable {
     protected Cell cell;
@@ -59,13 +62,21 @@ public abstract class Actor implements Drawable {
     }
 
     public boolean isDead(Actor actor) {
-        if(actor.health <= 0){
-             return true;
+        if (actor.health <= 0) {
+            return true;
         }
         return false;
     }
 
     public void kill() {
-        this.cell.setActor( null);
+        this.cell.setActor(null);
+        dropLoot(this.cell);
+    }
+
+    private void dropLoot(Cell cell) {
+        int luckyLoot = new Random().nextInt(3);
+        if (luckyLoot == 0) {
+            new HealthPotion(cell);
+        }
     }
 }
