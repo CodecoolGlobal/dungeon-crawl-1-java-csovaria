@@ -33,7 +33,7 @@ public class Main extends Application {
     public static int DISPLAY_WIDTH = 29;
     public static int DISPLAY_HEIGHT = 29;
 
-    public String currentMap = "/map.txt";
+    public String currentMap = "/map00.txt";
     boolean isChangedLevel = false;
     GameMap map = MapLoader.loadMap(currentMap);
     Canvas canvas = new Canvas(
@@ -158,6 +158,10 @@ public class Main extends Application {
     private void refresh() {
 //        Get the location of the player
         Player player = map.getPlayer();
+        if(player.getHealth() <=0){
+            currentMap = "/map00.txt";
+            map = MapLoader.loadMap(currentMap);
+        }
         // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
         if (player.getLevel() == 2 && !isChangedLevel) {
             isChangedLevel = true;

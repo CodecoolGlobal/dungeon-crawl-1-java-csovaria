@@ -14,6 +14,7 @@ public class Player extends Actor {
 
     protected int level = 1;
 
+
     private final List<Item> inventory = new ArrayList<>();
 
     public Player(Cell cell) {

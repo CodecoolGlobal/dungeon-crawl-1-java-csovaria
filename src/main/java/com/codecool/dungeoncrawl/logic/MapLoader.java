@@ -83,6 +83,14 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new LevelGate(cell);
                             break;
+                        case 'b':
+                            cell.setType(CellType.FLOOR);
+                            new BlueItem(cell);
+                            break;
+                        case 'á':
+                            cell.setType(CellType.FLOOR);
+                            new GreenItem(cell);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

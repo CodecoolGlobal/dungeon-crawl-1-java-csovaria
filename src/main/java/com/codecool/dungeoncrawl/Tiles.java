@@ -39,6 +39,8 @@ public class Tiles {
         tileMap.put("yellow_key", new Tile(16,23));
         tileMap.put("yellow_gate", new Tile(23,11));
         tileMap.put("level_gate", new Tile(11,11));
+        tileMap.put("blue", new Tile(8,5));
+        tileMap.put("green", new Tile(31,21));
 
     }
 
