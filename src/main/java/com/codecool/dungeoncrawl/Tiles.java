@@ -23,9 +23,9 @@ public class Tiles {
     }
 
     static {
-        tileMap.put("empty", new Tile(0, 0));
-        tileMap.put("wall", new Tile(10, 17));
-        tileMap.put("floor", new Tile(2, 0));
+        tileMap.put("empty", new Tile(5, 1));
+        tileMap.put("wall", new Tile(5, 1));
+        tileMap.put("floor", new Tile(1, 0));
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithSword", new Tile(28, 2));
         tileMap.put("sword", new Tile(0, 29));
