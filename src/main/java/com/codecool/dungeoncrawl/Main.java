@@ -29,7 +29,7 @@ import java.util.List;
 public class Main extends Application {
 //    This is the width and height of the visible area in terms of tiles
     public static int VISIBLE_TILES_SIZE = 10;
-    public static int DISPLAY_WIDTH = 45;
+    public static int DISPLAY_WIDTH = 24;
     public static int DISPLAY_HEIGHT = 24;
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
