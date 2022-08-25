@@ -58,7 +58,7 @@ public class Player extends Actor {
 
         // if gate is on next cell then call its interact
         if (nextCell.getItem() instanceof RedGate || nextCell.getItem() instanceof YellowGate || nextCell.getItem() instanceof LevelGate
-        || nextCell.getItem() instanceof NewGameGate) {
+        || nextCell.getItem() instanceof NewGameGate || nextCell.getItem() instanceof WinGate ) {
             nextCell.getItem().interact(this);
         }
         // simple move

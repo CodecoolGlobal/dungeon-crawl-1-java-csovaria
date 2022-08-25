@@ -16,7 +16,7 @@ public class LevelGate extends Item{
 
     @Override
     public boolean isNeedToActivate() {
-        return true;
+        return false;
     }
 
     @Override

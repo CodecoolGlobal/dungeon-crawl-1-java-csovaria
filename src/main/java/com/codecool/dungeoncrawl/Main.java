@@ -42,6 +42,8 @@ public class Main extends Application {
             DISPLAY_HEIGHT * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label health = new Label();
+    Label breakLine = new Label();
+    Label breakLine2 = new Label();
     Label pickUpItem = new Label();
     Label inventory = new Label();
 
@@ -59,16 +61,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane ui = new GridPane();
-        ui.setPrefWidth(550);
+        ui.setPrefWidth(700);
         ui.setPadding(new Insets(10));
         ui.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        ui.add(health, 0, 0);
+        ui.add(health, 0, 2);
         health.setTextFill(Color.RED);
         health.setFont(new Font(bigFontSize));
 
-        ui.add(new Label(""), 0 , 1);
-        ui.add(pickUpItem, 0, 1);
+        ui.add(breakLine, 0, 0);
+        ui.add(breakLine2, 0, 1);
+
+        ui.add(new Label(""), 0 , 3);
+        ui.add(pickUpItem, 0, 3);
         pickUpItem.setTextFill(Color.WHITE);
         pickUpItem.setFont(new Font(smallFontSize));
 
@@ -156,6 +161,8 @@ public class Main extends Application {
     private void refresh() {
 //        Get the location of the player
         Player player = map.getPlayer();
+
+        // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
         if(player.getHealth() <=0){
             currentMap = "/map00.txt";
             map = MapLoader.loadMap(currentMap);
@@ -164,14 +171,12 @@ public class Main extends Application {
             currentMap = "/mapWin.txt";
             map = MapLoader.loadMap(currentMap);
         }
-
-
-        // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
         if (player.getLevel() == 2 && !isChangedLevel) {
             isChangedLevel = true;
             currentMap = "/map02.txt";
             map = MapLoader.loadMap(currentMap);
         } else if (map.getPlayer().getLevel() == 9) {
+            isChangedLevel = false;
             currentMap = "/map.txt";
             map.getPlayer().setLevel(1);
             map = MapLoader.loadMap(currentMap);

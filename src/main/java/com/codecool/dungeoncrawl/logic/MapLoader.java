@@ -92,7 +92,7 @@ public class MapLoader {
                             new GreenItem(cell);
                             break;
                         case 'w':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.WALL);
                             new WinGate(cell);
                             break;
                         case 'n':
