@@ -11,8 +11,8 @@ import java.util.Scanner;
 import static com.codecool.dungeoncrawl.Main.monsters;
 
 public class MapLoader {
-    public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+    public static GameMap loadMap(String currentMap) {
+        InputStream is = MapLoader.class.getResourceAsStream(currentMap);
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -78,6 +78,10 @@ public class MapLoader {
                         case '4':
                             cell.setType(CellType.WALL);
                             new YellowGate(cell);
+                            break;
+                        case 'g':
+                            cell.setType(CellType.FLOOR);
+                            new LevelGate(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

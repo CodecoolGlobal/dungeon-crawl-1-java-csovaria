@@ -10,12 +10,24 @@ import java.util.List;
 
 public class Player extends Actor {
 
+
+
+    protected int level = 1;
+
     private final List<Item> inventory = new ArrayList<>();
 
     public Player(Cell cell) {
         super(cell);
         this.health = 10;
         this.damage = 3;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     @Override

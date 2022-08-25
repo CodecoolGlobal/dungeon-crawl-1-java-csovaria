@@ -38,6 +38,7 @@ public class Tiles {
         tileMap.put("fire_mage", new Tile(15,24));
         tileMap.put("yellow_key", new Tile(16,23));
         tileMap.put("yellow_gate", new Tile(23,11));
+        tileMap.put("level_gate", new Tile(11,11));
 
     }
 

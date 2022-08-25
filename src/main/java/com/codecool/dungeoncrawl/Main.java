@@ -28,10 +28,13 @@ import java.util.List;
 
 public class Main extends Application {
 //    This is the width and height of the visible area in terms of tiles
-    public static int VISIBLE_TILES_SIZE = 10;
-    public static int DISPLAY_WIDTH = 24;
-    public static int DISPLAY_HEIGHT = 24;
-    GameMap map = MapLoader.loadMap();
+    public static int VISIBLE_TILES_SIZE = 12;
+    public static int DISPLAY_WIDTH = 29;
+    public static int DISPLAY_HEIGHT = 29;
+
+    public String currentMap = "/map.txt";
+    boolean isChangedLevel = false;
+    GameMap map = MapLoader.loadMap(currentMap);
     Canvas canvas = new Canvas(
             DISPLAY_WIDTH * Tiles.TILE_WIDTH,
             DISPLAY_HEIGHT * Tiles.TILE_WIDTH);
@@ -54,6 +57,7 @@ public class Main extends Application {
         GridPane ui = new GridPane();
         ui.setPrefWidth(300);
         ui.setPadding(new Insets(10));
+
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
@@ -90,6 +94,7 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
+        pickUpItem.setText(String.valueOf(map.getPlayer().getLevel()));
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
@@ -123,7 +128,7 @@ public class Main extends Application {
             if(monster.isDead(monster)){
                 deadMonsters.add(monster);
             }
-            refresh();
+            // refresh();
         }
         // kill them
         for(Actor deadMonster: deadMonsters){
@@ -138,6 +143,13 @@ public class Main extends Application {
 //        Get the location of the player
         Player player = map.getPlayer();
         // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
+        if (player.getLevel() == 2 && !isChangedLevel) {
+            isChangedLevel = true;
+            pickUpItem.setText("KAPUUUUU" + player.getLevel());
+            currentMap = "/map02.txt";
+            map = MapLoader.loadMap(currentMap);
+        }
+
         int playerX = player.getX();
         int playerY = player.getY();
 //        Color the whole canvas
@@ -171,7 +183,7 @@ public class Main extends Application {
                     if (map.getPlayer().getCell().getItem() != null && map.getPlayer().getCell().getItem().isNeedToActivate()) {
                         pickUpAnActiveItem();
                     } else {
-                        pickUpItem.setText("");
+                       // pickUpItem.setText("");
                     }
                 } else {
                     Tiles.drawTile(context, cell, x, y);
