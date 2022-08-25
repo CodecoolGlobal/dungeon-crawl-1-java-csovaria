@@ -5,9 +5,11 @@ import com.codecool.dungeoncrawl.logic.items.Fire;
 
 public class FireMage extends Actor{
 
-    private final int damage = 2;
+
     public FireMage(Cell cell) {
         super(cell);
+        this.health = 5;
+        this.damage = 2;
     }
 
     @Override

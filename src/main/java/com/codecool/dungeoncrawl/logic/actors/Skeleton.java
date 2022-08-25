@@ -5,12 +5,17 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import java.util.Random;
 
 public class Skeleton extends Actor {
+
+
     public Skeleton(Cell cell) {
         super(cell);
+        this.health = 10;
+        this.damage = 3;
     }
 
     @Override
     public void monsterMove() {
+
         int randomDirection = new Random().nextInt(4);
         Cell nextCell= cell.getNeighbor(0, 1);
         switch (randomDirection) {

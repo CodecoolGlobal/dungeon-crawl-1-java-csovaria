@@ -13,6 +13,8 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
+        this.health = 10;
+        this.damage = 3;
     }
 
     @Override
@@ -28,18 +30,25 @@ public class Player extends Actor {
     }
 
     public void move(int dx, int dy) {
-
+        // Pick up item if player stands on it
         if (cell.getItem() != null) {
             if (!cell.getItem().isNeedToActivate()) {
                 cell.getItem().interact(this);
             }
         }
-
-
+        // if monster is on next cell then damage it
         Cell nextCell = cell.getNeighbor(dx, dy);
+        if(nextCell.getActor() != null){
+            int enemyHealth = nextCell.getActor().getHealth();
+            nextCell.getActor().setHealth(enemyHealth - this.damage);
+        }
+
+
+        // if gate is on next cell then call its interact
         if (nextCell.getItem() instanceof RedGate) {
             nextCell.getItem().interact(this);
         }
+        // simple move
         if (nextCell.validatePlayerMove()) {
             cell.setActor(null);
             nextCell.setActor(this);

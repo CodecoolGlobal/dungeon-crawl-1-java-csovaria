@@ -14,8 +14,9 @@ public abstract class Actor implements Drawable {
         this.health = health;
     }
 
-    private int health = 10;
+    protected int health;
     private int sword = 0;
+    protected int damage;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -23,6 +24,7 @@ public abstract class Actor implements Drawable {
     }
 
     public abstract void monsterMove();
+
 
     public int getHealth() {
         return
@@ -47,5 +49,16 @@ public abstract class Actor implements Drawable {
 
     public int getSword() {
         return sword;
+    }
+
+    public boolean isDead(Actor actor) {
+        if(actor.health <= 0){
+             return true;
+        }
+        return false;
+    }
+
+    public void kill() {
+        this.cell.setActor( null);
     }
 }

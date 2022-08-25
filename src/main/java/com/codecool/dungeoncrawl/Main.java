@@ -117,10 +117,20 @@ public class Main extends Application {
         context.scale(s, s);
     }
     private void moveMonsters() {
+        List<Actor> deadMonsters = new ArrayList<>();
         for (Actor monster: monsters) {
             monster.monsterMove();
+            if(monster.isDead(monster)){
+                deadMonsters.add(monster);
+            }
             refresh();
         }
+        // kill them
+        for(Actor deadMonster: deadMonsters){
+            monsters.remove(deadMonster);
+            deadMonster.kill();
+        }
+        refresh();
 
     }
 
