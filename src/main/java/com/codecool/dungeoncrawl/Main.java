@@ -29,10 +29,12 @@ import java.util.List;
 public class Main extends Application {
 //    This is the width and height of the visible area in terms of tiles
     public static int VISIBLE_TILES_SIZE = 10;
+    public static int DISPLAY_WIDTH = 45;
+    public static int DISPLAY_HEIGHT = 24;
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
-            VISIBLE_TILES_SIZE * Tiles.TILE_WIDTH,
-            VISIBLE_TILES_SIZE * Tiles.TILE_WIDTH);
+            DISPLAY_WIDTH * Tiles.TILE_WIDTH,
+            DISPLAY_HEIGHT * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label pickUpItem = new Label();
@@ -50,7 +52,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
+        ui.setPrefWidth(300);
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
@@ -69,6 +71,9 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
+
+        scale(2.4);
+
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
@@ -80,7 +85,7 @@ public class Main extends Application {
                 )
         );
         timeLine.getKeyFrames().add(keyFrame);
-        timeLine.setCycleCount(100);
+        timeLine.setCycleCount(999999);
         timeLine.play();
     }
 
@@ -108,6 +113,9 @@ public class Main extends Application {
         }
     }
 
+    public void scale(double s) {
+        context.scale(s, s);
+    }
     private void moveMonsters() {
         for (Actor monster: monsters) {
             monster.monsterMove();
