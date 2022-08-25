@@ -160,6 +160,12 @@ public class Main extends Application {
             currentMap = "/map00.txt";
             map = MapLoader.loadMap(currentMap);
         }
+        if (player.getLevel() == 3) {
+            currentMap = "/mapWin.txt";
+            map = MapLoader.loadMap(currentMap);
+        }
+
+
         // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
         if (player.getLevel() == 2 && !isChangedLevel) {
             isChangedLevel = true;

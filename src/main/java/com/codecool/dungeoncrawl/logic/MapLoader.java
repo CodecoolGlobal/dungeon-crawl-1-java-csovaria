@@ -91,6 +91,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new GreenItem(cell);
                             break;
+                        case 'w':
+                            cell.setType(CellType.FLOOR);
+                            new WinGate(cell);
+                            break;
                         case 'n':
                             cell.setType(CellType.WALL);
                             new NewGameGate(cell);
