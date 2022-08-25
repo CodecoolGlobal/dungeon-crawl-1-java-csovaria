@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.items.Item;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -16,9 +17,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -39,10 +40,12 @@ public class Main extends Application {
             DISPLAY_WIDTH * Tiles.TILE_WIDTH,
             DISPLAY_HEIGHT * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
-    Label healthLabel = new Label();
+    Label health = new Label();
     Label pickUpItem = new Label();
     Label inventory = new Label();
 
+    private static int bigFontSize = 25;
+    private static int smallFontSize = 20;
     int delay = 400;
     Timeline timeLine = new Timeline();
 
@@ -55,23 +58,37 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane ui = new GridPane();
-        ui.setPrefWidth(300);
+        ui.setPrefWidth(550);
         ui.setPadding(new Insets(10));
+        ui.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
+        ui.add(health, 0, 0);
+        //ui.add(healthLabel, 1, 0);
+        //healthLabel.setTextFill(Color.RED);
+        //healthLabel.setFont(new Font(bigFontSize));
+        health.setTextFill(Color.RED);
+        health.setFont(new Font(bigFontSize));
 
-        ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
-
-        ui.add(new Label(""), 0 , 0);
+        ui.add(new Label(""), 0 , 1);
         ui.add(pickUpItem, 0, 1);
+        pickUpItem.setTextFill(Color.WHITE);
+        pickUpItem.setFont(new Font(smallFontSize));
 
-        ui.add(new Label("Inventory"), 0 , 9);
+        Label inventoryLabel = new Label();
+        inventoryLabel.setText("Inventory:");
+        ui.add(inventoryLabel, 0 , 9);
         ui.add(inventory, 0, 10);
+        inventory.setTextFill(Color.WHITE);
+        inventory.setFont(new Font(smallFontSize));
+        inventoryLabel.setTextFill(Color.YELLOW);
+        inventoryLabel.setFont(new Font(smallFontSize));
+
 
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
         borderPane.setRight(ui);
+        borderPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
@@ -94,7 +111,6 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        pickUpItem.setText(String.valueOf(map.getPlayer().getLevel()));
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
@@ -145,7 +161,6 @@ public class Main extends Application {
         // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
         if (player.getLevel() == 2 && !isChangedLevel) {
             isChangedLevel = true;
-            pickUpItem.setText("KAPUUUUU" + player.getLevel());
             currentMap = "/map02.txt";
             map = MapLoader.loadMap(currentMap);
         }
@@ -183,19 +198,24 @@ public class Main extends Application {
                     if (map.getPlayer().getCell().getItem() != null && map.getPlayer().getCell().getItem().isNeedToActivate()) {
                         pickUpAnActiveItem();
                     } else {
-                       // pickUpItem.setText("");
+                       pickUpItem.setText("");
                     }
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
             }
         }
-        healthLabel.setText("" + map.getPlayer().getHealth());
-        inventory.setText("" + map.getPlayer().getInventory());
+        health.setText("♥ " + String.valueOf(map.getPlayer().getHealth()));
+        StringBuilder inventoryStr = new StringBuilder();
+        for (Item item: map.getPlayer().getInventory()) {
+            inventoryStr.append(item);
+            inventoryStr.append("\n");
+        }
+        inventory.setText("" + inventoryStr);
     }
 
     private void pickUpAnActiveItem() {
-                pickUpItem.setText("Click or hit Enter\n to Pick up item: " + map.getPlayer().getCell().getItem());
+                pickUpItem.setText("Click or hit Enter to pick up item: " + map.getPlayer().getCell().getItem());
                 pickUpItem.setOnMouseClicked(this::pickUp);
     }
 
