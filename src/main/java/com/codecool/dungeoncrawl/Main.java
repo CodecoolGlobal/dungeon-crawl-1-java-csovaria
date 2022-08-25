@@ -30,7 +30,7 @@ public class Main extends Application {
 //    This is the width and height of the visible area in terms of tiles
     public static int VISIBLE_TILES_SIZE = 10;
     public static int DISPLAY_WIDTH = 45;
-    public static int DISPLAY_HEIGHT = 24;
+    public static int DISPLAY_HEIGHT = 20;
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
             DISPLAY_WIDTH * Tiles.TILE_WIDTH,
@@ -72,7 +72,7 @@ public class Main extends Application {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
 
-        scale(2.4);
+        //scale(2.4);
 
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
@@ -134,25 +134,34 @@ public class Main extends Application {
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
 //        Fill the visible part of the canvas
-        for (int x = 0; x < VISIBLE_TILES_SIZE; x++) {
-            for (int y = 0; y < VISIBLE_TILES_SIZE; y++) {
+        for (int x = 0; x < DISPLAY_WIDTH; x++) {
+            for (int y = 0; y < DISPLAY_HEIGHT; y++) {
+
 //                Create new variable, we need this, because the player will not be centered when on the edge
                 int middleX = playerX;
                 int middleY = playerY;
+
 //                Check if the player is close to the edge, in this case the center will not be the player's coordinates
-                if (playerX - VISIBLE_TILES_SIZE / 2 < 0) {
-                    middleX = VISIBLE_TILES_SIZE / 2;
-                } else if (playerX + VISIBLE_TILES_SIZE / 2 > map.getWidth()) {
-                    middleX = map.getWidth() - VISIBLE_TILES_SIZE / 2;
+                if (playerX - DISPLAY_WIDTH / 2 < 0) {
+                    middleX = DISPLAY_WIDTH / 2;
+                } else if (playerX + DISPLAY_WIDTH / 2 > map.getWidth()) {
+                    middleX = map.getWidth() - DISPLAY_WIDTH / 2;
                 }
-                if (playerY - VISIBLE_TILES_SIZE / 2 < 0) {
-                    middleY = VISIBLE_TILES_SIZE / 2;
-                } else if (playerY + VISIBLE_TILES_SIZE / 2 > map.getHeight()) {
-                    middleY = map.getHeight() - VISIBLE_TILES_SIZE / 2;
+                if (playerY - DISPLAY_HEIGHT / 2 < 0) {
+                    middleY = DISPLAY_HEIGHT / 2;
+                } else if (playerY + DISPLAY_HEIGHT / 2 > map.getHeight()) {
+                    middleY = map.getHeight() - DISPLAY_HEIGHT / 2;
                 }
 
 //                Read cell value from map at the generated coordinates and draw Tiles on the canvas
-                Cell cell = map.getCell(middleX - (VISIBLE_TILES_SIZE/2) + x, middleY - (VISIBLE_TILES_SIZE/2) + y);
+                System.out.println(playerY);
+                System.out.println("middleX: " + (middleX - (DISPLAY_WIDTH/2) + x));
+                System.out.println("middleY: " + (middleY - (DISPLAY_HEIGHT/2) + y));
+                System.out.println(DISPLAY_HEIGHT);
+                System.out.println(map.getHeight());
+
+                Cell cell = map.getCell(middleX - (DISPLAY_WIDTH/2) + x, middleY - (DISPLAY_HEIGHT/2) + y);
+
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
