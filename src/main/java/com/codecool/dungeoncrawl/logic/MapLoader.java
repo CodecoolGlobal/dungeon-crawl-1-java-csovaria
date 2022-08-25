@@ -71,6 +71,14 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             monsters.add(new FireMage(cell));
                             break;
+                        case '3':
+                            cell.setType(CellType.FLOOR);
+                            new YellowKey(cell);
+                            break;
+                        case '4':
+                            cell.setType(CellType.WALL);
+                            new YellowGate(cell);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

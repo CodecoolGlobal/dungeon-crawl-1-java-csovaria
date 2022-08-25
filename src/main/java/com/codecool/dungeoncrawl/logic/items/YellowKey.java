@@ -3,9 +3,10 @@ package com.codecool.dungeoncrawl.logic.items;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 
-public class RedKey extends Item {
+public class YellowKey extends Item {
 
-    public RedKey(Cell cell) {
+
+    public YellowKey(Cell cell) {
         super(cell);
     }
 
@@ -22,6 +23,6 @@ public class RedKey extends Item {
 
     @Override
     public String toString() {
-        return "red_key";
+        return "yellow_key";
     }
 }

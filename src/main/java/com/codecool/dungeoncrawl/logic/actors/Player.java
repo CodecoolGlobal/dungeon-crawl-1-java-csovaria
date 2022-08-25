@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.items.RedGate;
+import com.codecool.dungeoncrawl.logic.items.YellowGate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class Player extends Actor {
 
 
         // if gate is on next cell then call its interact
-        if (nextCell.getItem() instanceof RedGate) {
+        if (nextCell.getItem() instanceof RedGate || nextCell.getItem() instanceof YellowGate) {
             nextCell.getItem().interact(this);
         }
         // simple move
