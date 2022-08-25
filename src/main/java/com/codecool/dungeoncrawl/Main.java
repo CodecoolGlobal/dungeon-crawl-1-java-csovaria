@@ -171,9 +171,9 @@ public class Main extends Application {
             isChangedLevel = true;
             currentMap = "/map02.txt";
             map = MapLoader.loadMap(currentMap);
-        } else if (player.getLevel() == 9) {
+        } else if (map.getPlayer().getLevel() == 9) {
             currentMap = "/map.txt";
-            player.setLevel(1);
+            map.getPlayer().setLevel(1);
             map = MapLoader.loadMap(currentMap);
         }
 
