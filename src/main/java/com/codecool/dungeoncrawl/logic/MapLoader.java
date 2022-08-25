@@ -80,7 +80,7 @@ public class MapLoader {
                             new YellowGate(cell);
                             break;
                         case 'g':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.WALL);
                             new LevelGate(cell);
                             break;
                         case 'b':

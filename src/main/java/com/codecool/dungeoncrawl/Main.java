@@ -33,7 +33,7 @@ public class Main extends Application {
     public static int DISPLAY_WIDTH = 29;
     public static int DISPLAY_HEIGHT = 29;
 
-    public String currentMap = "/map00.txt";
+    public String currentMap = "/map.txt";
     boolean isChangedLevel = false;
     GameMap map = MapLoader.loadMap(currentMap);
     Canvas canvas = new Canvas(
@@ -63,9 +63,6 @@ public class Main extends Application {
         ui.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
         ui.add(health, 0, 0);
-        //ui.add(healthLabel, 1, 0);
-        //healthLabel.setTextFill(Color.RED);
-        //healthLabel.setFont(new Font(bigFontSize));
         health.setTextFill(Color.RED);
         health.setFont(new Font(bigFontSize));
 
@@ -168,6 +165,7 @@ public class Main extends Application {
             currentMap = "/map02.txt";
             map = MapLoader.loadMap(currentMap);
         }
+
 
         int playerX = player.getX();
         int playerY = player.getY();

@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
+import com.codecool.dungeoncrawl.logic.items.LevelGate;
 import com.codecool.dungeoncrawl.logic.items.RedGate;
 import com.codecool.dungeoncrawl.logic.items.YellowGate;
 
@@ -19,7 +20,7 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
-        this.health = 10;
+        this.health = 50;
         this.damage = 3;
     }
 
@@ -59,7 +60,7 @@ public class Player extends Actor {
 
 
         // if gate is on next cell then call its interact
-        if (nextCell.getItem() instanceof RedGate || nextCell.getItem() instanceof YellowGate) {
+        if (nextCell.getItem() instanceof RedGate || nextCell.getItem() instanceof YellowGate || nextCell.getItem() instanceof LevelGate) {
             nextCell.getItem().interact(this);
         }
         // simple move
