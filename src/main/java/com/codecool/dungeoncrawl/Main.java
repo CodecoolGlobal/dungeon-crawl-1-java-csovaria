@@ -35,6 +35,7 @@ public class Main extends Application {
 
     public String currentMap = "/map.txt";
     boolean isChangedLevel = false;
+
     GameMap map = MapLoader.loadMap(currentMap);
     Canvas canvas = new Canvas(
             DISPLAY_WIDTH * Tiles.TILE_WIDTH,
@@ -163,6 +164,10 @@ public class Main extends Application {
         if (player.getLevel() == 2 && !isChangedLevel) {
             isChangedLevel = true;
             currentMap = "/map02.txt";
+            map = MapLoader.loadMap(currentMap);
+        } else if (player.getLevel() == 9) {
+            currentMap = "/map.txt";
+            player.setLevel(1);
             map = MapLoader.loadMap(currentMap);
         }
 

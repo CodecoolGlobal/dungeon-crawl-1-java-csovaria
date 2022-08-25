@@ -41,7 +41,7 @@ public class Tiles {
         tileMap.put("level_gate", new Tile(11,11));
         tileMap.put("blue", new Tile(8,5));
         tileMap.put("green", new Tile(31,21));
-
+        tileMap.put("new_game_gate", new Tile(11,11));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
