@@ -16,6 +16,7 @@ public class Sword extends Item {
         player.setSword(1);
         player.getCell().setItem(null);
         player.setInventory(this);
+        player.setDamage(player.getDamage() + 3);
     }
 
     @Override

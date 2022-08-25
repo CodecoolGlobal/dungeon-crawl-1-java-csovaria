@@ -137,6 +137,7 @@ public class Main extends Application {
     private void refresh() {
 //        Get the location of the player
         Player player = map.getPlayer();
+        // todo   CHECK PLAYER'S HEALTH AND  CALL ENDGAME  WHEN ITS BELOW OR EQ ZZERO
         int playerX = player.getX();
         int playerY = player.getY();
 //        Color the whole canvas

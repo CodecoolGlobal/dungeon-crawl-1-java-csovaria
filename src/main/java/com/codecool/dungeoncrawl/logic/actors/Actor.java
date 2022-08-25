@@ -25,6 +25,13 @@ public abstract class Actor implements Drawable {
 
     public abstract void monsterMove();
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 
     public int getHealth() {
         return
