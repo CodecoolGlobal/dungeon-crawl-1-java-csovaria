@@ -6,6 +6,7 @@ import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.Item;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -28,7 +29,7 @@ import java.util.List;
 
 
 public class Main extends Application {
-//    This is the width and height of the visible area in terms of tiles
+    //    This is the width and height of the visible area in terms of tiles
     public static int VISIBLE_TILES_SIZE = 12;
     public static int DISPLAY_WIDTH = 29;
     public static int DISPLAY_HEIGHT = 29;
@@ -105,11 +106,10 @@ public class Main extends Application {
         primaryStage.show();
 
         KeyFrame keyFrame = new KeyFrame(Duration.millis(delay),
-                event -> Platform.runLater(this::moveMonsters
-                )
+                event -> Platform.runLater(this::moveMonsters)
         );
         timeLine.getKeyFrames().add(keyFrame);
-        timeLine.setCycleCount(999999);
+        timeLine.setCycleCount(Animation.INDEFINITE);
         timeLine.play();
     }
 
@@ -216,7 +216,7 @@ public class Main extends Application {
                     if (map.getPlayer().getCell().getItem() != null && map.getPlayer().getCell().getItem().isNeedToActivate()) {
                         pickUpAnActiveItem();
                     } else {
-                       pickUpItem.setText("");
+                        pickUpItem.setText("");
                     }
                 } else {
                     Tiles.drawTile(context, cell, x, y);
@@ -233,8 +233,8 @@ public class Main extends Application {
     }
 
     private void pickUpAnActiveItem() {
-                pickUpItem.setText("Click or hit Enter to pick up item: " + map.getPlayer().getCell().getItem());
-                pickUpItem.setOnMouseClicked(this::pickUp);
+        pickUpItem.setText("Click or hit Enter to pick up item: " + map.getPlayer().getCell().getItem());
+        pickUpItem.setOnMouseClicked(this::pickUp);
     }
 
     private void pickUp(MouseEvent mouseEvent) {
